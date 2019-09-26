@@ -1,0 +1,10 @@
+{
+  "cSpell.ignoreWords": ["babel", "polyfill"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "html.format.endWithNewline": true,
+  "html.format.indentHandlebars": true,
+  "html.format.indentInnerHtml": true,
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnSaveTimeout": 250
+}
