@@ -6,5 +6,6 @@
   "html.format.indentHandlebars": true,
   "html.format.indentInnerHtml": true,
   "files.autoSave": "onFocusChange",
-  "editor.formatOnSaveTimeout": 250
+  "editor.formatOnSaveTimeout": 250,
+  "editor.tabSize": 2
 }
