@@ -10,7 +10,10 @@ describe("Routes Test suite", () => {
       .attach("iss_file", "./test/mock/mock.txt")
       .expect(201)
       .end((err, res) => {
-        if (err) return console.error("Error:", err);
+        if (err) {
+          console.error("Error:", err);
+          return done();
+        }
 
         strictEqual(res.body.message, "Uploaded successfully.");
         strictEqual(res.body.status, "success");
@@ -24,8 +27,10 @@ describe("Routes Test suite", () => {
       .attach("iss_file", "")
       .expect(400)
       .end((err, res) => {
-        if (err) return console.error("Error:", err);
-
+        if (err) {
+          console.error("Error:", err);
+          return done();
+        }
         strictEqual(res.body.message, "No files were uploaded.");
         strictEqual(res.body.status, "error");
         done();
