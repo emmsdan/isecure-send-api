@@ -6,6 +6,7 @@ import fileUpload from "express-fileupload";
 
 import { logger, env, isFileExist } from "./utils/utils";
 import FileManager from "./utils/FileManager";
+import validator from "./utils/validator";
 
 const app = express();
 const PORT = env("PORT", 5900);
@@ -23,7 +24,7 @@ app.get("/", async (req, res) => {
   res.send("Welcome to iSecure-sharer");
 });
 
-app.post("/upload", async (req, res) => {
+app.post("/upload", validator.form, async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res
