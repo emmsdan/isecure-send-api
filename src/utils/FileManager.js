@@ -50,7 +50,7 @@ class FileManager {
       zip.addFile(file.name, Buffer.alloc(file.data.length, file.data));
     });
     await zip.toBuffer();
-    const filename = this.generateName("a.zip", this.request.body.name);
+    const filename = this.generateName("a.zip", this.request.body.sender_name);
     const file = {
       dir: this.__filePath,
       filename,
