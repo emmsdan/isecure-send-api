@@ -23,16 +23,23 @@ app.get("/", async (req, res) => {
   res.send("Welcome to iSecure-sharer");
 });
 
-app.post("/upload", (req, res) => {
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send("No files were uploaded.");
-  }
+app.post("/upload", async (req, res) => {
   try {
-    fileSystem.zip(req.files.iss_file, async file => {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res
+        .status(400)
+        .json({ message: "No files were uploaded.", status: "error" });
+    }
+    await fileSystem.requestObject(req).zip(async file => {
       const exist = await isFileExist(file.fullPath);
-      if (exist) return res.json("sorry we would not upload file");
+      if (exist) {
+        return res.json("sorry we would not upload file").status(400);
+      }
 
-      return res.json({ message: "Uploaded successfully." });
+      return res.status(201).json({
+        message: "Uploaded successfully.",
+        status: "success"
+      });
     });
   } catch (error) {
     res.send(error);
@@ -40,3 +47,5 @@ app.post("/upload", (req, res) => {
 });
 
 app.listen(PORT, () => logger(`Server Started on: http://localhost:${PORT}`));
+
+export default app;

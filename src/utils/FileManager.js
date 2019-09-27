@@ -7,38 +7,50 @@ class FileManager {
     this.__uploadPath = path.join(__dirname, "../storage/temp/");
   }
 
-  setDir(dir) {
+  setFileDir(dir) {
     this.__filePath = dir;
   }
 
-  getDir() {
+  getFileDir() {
     return this.__filePath;
   }
 
   generateName(file, user = "anonymous") {
     const extension = path.extname(file);
     const timestamp = new Date().getTime();
-    return `./${user}_${timestamp}_emmsdan-iss${extension}`;
+    return `./${user} (${timestamp}) emmsdan[iss]${extension}`;
   }
 
-  download(res, filename) {
+  download(res, filename, callback = () => {}) {
     res.download(path.join(this.__filePath, filename), err => {
-      if (err) {
-        return res.json({
-          error: "Could not download file, due to server error."
-        });
-      }
+      callback(err);
+      return res.json({
+        error: "Could not download file, due to server error."
+      });
     });
   }
 
-  async zip(files, callback = () => {}) {
+  requestObject(request) {
+    this.request = request;
+    return this;
+  }
+
+  async zip(
+    callback = file => {
+      return file;
+    }
+  ) {
+    let files = this.request.files.iss_file;
+    if (!Array.isArray(files)) {
+      files = [files];
+    }
     const zip = new AdmZip();
 
     await files.forEach(file => {
       zip.addFile(file.name, Buffer.alloc(file.data.length, file.data));
     });
     await zip.toBuffer();
-    const filename = this.generateName("a.zip");
+    const filename = this.generateName("a.zip", this.request.body.name);
     const file = {
       dir: this.__filePath,
       filename,
