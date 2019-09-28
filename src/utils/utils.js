@@ -19,3 +19,9 @@ export const isFileExist = filePath => {
     });
   });
 };
+
+export const randomString = (max, min = 2) => {
+  return Math.random()
+    .toString(36)
+    .substr(min, max);
+};
