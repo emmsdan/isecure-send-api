@@ -1,10 +1,10 @@
 # iSecure-send-api
 
-A simple end-to-end encrypted file sending system.
+I woke up one morning and decided to do "**_A simple end-to-end encrypted file sending system_**". That's why we have this project. so nothing big but you can contribute to it by just raising a PR.
 
 [![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](http://standardjs.com)
 
-## API DEFINATIONS
+## API DEFINITIONS
 
 ### Refresh Database
 
