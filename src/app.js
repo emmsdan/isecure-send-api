@@ -7,6 +7,7 @@ import fileUpload from "express-fileupload";
 import { logger, env, isFileExist } from "./utils/utils";
 import FileManager from "./utils/FileManager";
 import validator from "./utils/validator";
+import ISSController from "./controller/ISSController";
 
 const app = express();
 const PORT = env("PORT", 5900);
@@ -24,7 +25,12 @@ app.get("/", async (req, res) => {
   res.send("Welcome to iSecure-sharer");
 });
 
-app.post("/upload", validator.form, async (req, res) => {
+app.get("/api/refresh", async (req, res) => {
+  ISSController.refreshDB();
+  res.json({ message: "Database Tables refresh" });
+});
+
+app.post("/api/upload", validator.form, async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res
@@ -36,10 +42,12 @@ app.post("/upload", validator.form, async (req, res) => {
       if (exist) {
         return res.json("sorry we would not upload file").status(400);
       }
-
+      req.body.file_url = file.filename;
+      const fileInfo = await ISSController.secureFile(req, res);
       return res.status(201).json({
         message: "Uploaded successfully.",
-        status: "success"
+        status: "success",
+        fileInfo
       });
     });
   } catch (error) {

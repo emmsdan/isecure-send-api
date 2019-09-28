@@ -20,22 +20,22 @@ const validateRequest = (req, res, next) => {
 
 export default {
   form: [
-    check("sender_mail").isEmail(),
-    check("receiver_mail").isEmail(),
+    check("sender_email").isEmail(),
+    check("receiver_email").isEmail(),
     body("sender_name", "Enter a valid name.").custom(value => {
       if (!isName(value)) {
         throw new Error("Invalid Name supplied.");
       }
       return true;
     }),
-    check("expire").isIn(EXPIRES_IN),
+    check("expires_in").isIn(EXPIRES_IN),
     check("downloads_allowed").isIn(TOTAL_DOWNLOADS_ALLOWED),
     validateRequest
   ],
   url: [
     check("token")
       .exists()
-      .isUUID(),
+      .contains("/"),
     validateRequest
   ]
 };
