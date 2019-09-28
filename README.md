@@ -1,6 +1,12 @@
 # iSecure-send-api
 
-I woke up one morning and decided to do "**_A simple end-to-end encrypted file sending system_**". That's why we have this project. so nothing big but you can contribute to it by just raising a PR.
+I woke up one morning and decided to do "**_A simple end-to-end encrypted file sending system_**". That's why we have this project.
+
+It has just one feature:
+
+- upload files and send
+
+but you can contribute to it by just raising a PR.
 
 [![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](http://standardjs.com)
 
@@ -14,7 +20,7 @@ I woke up one morning and decided to do "**_A simple end-to-end encrypted file s
 
 ```Json
 {
-  message: "Database Tables refresh"
+  "message": "Database Tables refresh"
 }
 ```
 
@@ -24,16 +30,20 @@ I woke up one morning and decided to do "**_A simple end-to-end encrypted file s
 
 #### request
 
+Use the follow:
+
+- for `expires_in`: `"5m", "1h", "12h", "1d", "3d", "5d", "7d"`
+- for `downloads_allowed`: `1, 10, 15, 20, 25, 50, 100`
+- for `iss_file`: `upload files to be zipped`
+
 ```Json
 {
   "sender_name": "Emmanuel Daniel",
   "sender_email": "uniq@mail.org",
   "receiver_email": "example@main.com",
   "expires_in": "5m",
-  // expire "5m", "1h", "12h", "1d", "3d", "5d", "7d"
   "downloads_allowed": "10",
-  // downloads 1, 10, 15, 20, 25, 50, 100
-  "iss_file": Blob(files)
+  "iss_file": "files"
 }
 ```
 
