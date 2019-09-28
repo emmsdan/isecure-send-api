@@ -25,11 +25,12 @@ app.get("/", async (req, res) => {
   res.send("Welcome to iSecure-sharer");
 });
 
-app.get("/refresh", async (req, res) => {
-  res.json(ISSController.refreshDB());
+app.get("/api/refresh", async (req, res) => {
+  ISSController.refreshDB();
+  res.json({ message: "Database Tables refresh" });
 });
 
-app.post("/upload", validator.form, async (req, res) => {
+app.post("/api/upload", validator.form, async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res
