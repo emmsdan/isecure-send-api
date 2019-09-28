@@ -67,3 +67,21 @@ Use the follow:
     }
 }
 ```
+
+### Download File
+
+**_POST:_** `api/:secure_id` (secure_id = (url generated during upload))
+
+#### response
+
+##### Success
+
+- should download the file
+
+##### Error
+
+```Json
+{
+  "message": "URL has expired or is invalid."
+}
+```
