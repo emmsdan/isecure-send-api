@@ -23,10 +23,12 @@ class FileManager {
 
   download(res, filename, callback = () => {}) {
     res.download(path.join(this.__filePath, filename), err => {
-      callback(err);
-      return res.json({
-        error: "Could not download file, due to server error."
-      });
+      if (err) {
+        callback(err);
+        return res.json({
+          error: "Could not download file, due to server error."
+        });
+      }
     });
   }
 
