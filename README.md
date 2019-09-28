@@ -4,7 +4,7 @@ I woke up one morning and decided to do "**_A simple end-to-end encrypted file s
 
 It has just three main feature:
 
-- upload files and send
+- upload files and secure
 - control file access/download
   - download files a number of times.
   - files can't be downloaded after a particular time
@@ -12,7 +12,16 @@ It has just three main feature:
 
 but you can contribute to it by just raising a PR.
 
+LIVE API DEMO: `https://my-secure-share-api.herokuapp.com/`
+FRONTEND REPO: `https://github.com/emmsdan/isecure-send-frontend`
+
 [![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](http://standardjs.com)
+
+## TECHS
+
+- NodeJS/ExpressJS
+- Mysql
+- heroku
 
 ## API DEFINITIONS
 

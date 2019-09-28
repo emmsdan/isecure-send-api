@@ -51,7 +51,7 @@ class ISSController {
     const fileID = isValidId(req.params);
     const [fileData] = await DB.query(
       `SELECT
-        iss_files.expires_in, iss_files.downloads_allowed, iss_files.file_url, iss_files.created_at, iss_file_url.downloads, iss_file_url.updated_at
+        iss_files.expires_in, iss_files.downloads_allowed, iss_files.file_url, iss_files.created_at, iss_file_url.downloads
       FROM iss_files
       INNER JOIN iss_file_url
       ON iss_files.id = iss_file_url.file_id

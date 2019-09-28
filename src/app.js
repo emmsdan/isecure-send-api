@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 app.get("/", async (req, res) => {
   // fileSystem.download(res);
-  res.send("Welcome to iSecure-sharer");
+  res.json("Welcome to iSecure-sharer");
 });
 
 app.get("/api/refresh", async (req, res) => {
