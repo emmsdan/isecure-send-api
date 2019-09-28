@@ -2,9 +2,13 @@
 
 I woke up one morning and decided to do "**_A simple end-to-end encrypted file sending system_**". That's why we have this project.
 
-It has just one feature:
+It has just three main feature:
 
 - upload files and send
+- control file access/download
+  - download files a number of times.
+  - files can't be downloaded after a particular time
+- only the person sent to can access/download it.
 
 but you can contribute to it by just raising a PR.
 
@@ -61,5 +65,23 @@ Use the follow:
         "expires_in": "5m",
         "downloads_allowed": "10"
     }
+}
+```
+
+### Download File
+
+**_POST:_** `api/:secure_id` (secure_id = (url generated during upload))
+
+#### response
+
+##### Success
+
+- should download the file
+
+##### Error
+
+```Json
+{
+  "message": "URL has expired or is invalid."
 }
 ```

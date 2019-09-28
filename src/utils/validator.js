@@ -33,9 +33,9 @@ export default {
     validateRequest
   ],
   url: [
-    check("token")
+    check("email")
       .exists()
-      .contains("/"),
+      .isEmail(""),
     validateRequest
   ]
 };

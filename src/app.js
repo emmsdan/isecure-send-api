@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 
-import { logger, env, isFileExist } from "./utils/utils";
+import { logger, env, isFileExist, isValidId } from "./utils/utils";
 import FileManager from "./utils/FileManager";
 import validator from "./utils/validator";
 import ISSController from "./controller/ISSController";
@@ -55,6 +55,13 @@ app.post("/api/upload", validator.form, async (req, res) => {
   }
 });
 
+app.post("/api/:fileID", async (req, res) => {
+  if (isValidId(req.params)) {
+    return ISSController.accessFile(req, res);
+  } else {
+    res.json("help");
+  }
+});
 app.listen(PORT, () => logger(`Server Started on: http://localhost:${PORT}`));
 
 export default app;
